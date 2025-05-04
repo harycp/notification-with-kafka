@@ -4,3 +4,5 @@ const handleTaskAssigned = async ({ userId, title }) => {
   const message = `You have been assigned a task: ${title}`;
   await Notification.create({ userId, message });
 };
+
+module.exports = { handleTaskAssigned };
