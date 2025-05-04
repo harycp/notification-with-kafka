@@ -2,6 +2,7 @@ require("dotenv").config();
 const express = require("express");
 const app = express();
 const { sequelize } = require("./config/database");
+const { startConsumer } = require("./consumer/taskAssignedConsumer");
 
 const db = require("./models");
 
@@ -14,6 +15,9 @@ app.listen(PORT, async () => {
     await db.sequelize.sync({ alter: true });
     console.log("Database connected.");
     app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+
+    // Start Kafka consumer
+    startConsumer();
   } catch (error) {
     console.error("Database connection error:", error);
   }
