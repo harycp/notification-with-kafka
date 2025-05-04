@@ -1,5 +1,5 @@
 const User = require("../models/User");
-const { produceKafkaMessage } = require("./kafkaProducer");
+const { produceKafkaMessage } = require("../config/kafkaProducer");
 
 const createUser = async (data) => {
   const user = await User.create(data);
