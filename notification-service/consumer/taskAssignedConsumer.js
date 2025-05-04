@@ -5,6 +5,7 @@ const consumer = kafka.consumer({ groupId: "notification-group" });
 
 const startConsumer = async () => {
   await consumer.connect();
+  await new Promise((resolve) => setTimeout(resolve, 3000));
   await consumer.subscribe({ topic: "task-assigned", fromBeginning: true });
 
   await consumer.run({
