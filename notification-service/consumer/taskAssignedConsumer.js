@@ -1,5 +1,5 @@
 const { kafka } = require("../config/kafka");
-const { handleTaskAssigned } = require("../services/notificationService");
+const notificationService = require("../services/notificationService");
 
 const consumer = kafka.consumer({ groupId: "notification-group" });
 
@@ -12,7 +12,7 @@ const startConsumer = async () => {
     eachMessage: async ({ topic, partition, message }) => {
       const data = JSON.parse(message.value.toString());
       console.log("[Kafka] Received:", data);
-      await handleTaskAssigned(data);
+      await notificationService.handleTaskAssigned(data);
     },
   });
 };
